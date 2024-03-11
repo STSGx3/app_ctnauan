@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "63273634988",
+    "project_id": "appct-42f4a",
+    "storage_bucket": "appct-42f4a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63273634988:android:fdda8af1b4d6063495e309",
+        "android_client_info": {
+          "package_name": "com.example.baitaplonadnc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8CWVJf0bpyhAlV0f8nB-v4nN449t3ANI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
