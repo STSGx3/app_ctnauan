@@ -13,6 +13,9 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".Total_calories"
+            android:exported="false" />
+        <activity
             android:name=".Search"
             android:exported="false" />
         <activity
@@ -20,8 +23,7 @@
             android:exported="false" />
         <activity
             android:name=".Sign_up"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
