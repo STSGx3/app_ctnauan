@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Search">
+    tools:context=".Total_calories">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,26 +28,6 @@
 
 
         <!-- Nội dung chính của ứng dụng -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp" >
-            <EditText
-                android:id="@+id/edt_search"
-                android:layout_width="240dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="60dp"
-                android:textSize="15dp"
-                android:background="@drawable/custtom_edt2"/>
-            <ImageButton
-                android:id="@+id/button_search"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/search"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="5dp"
-                />
-        </LinearLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
@@ -61,6 +41,27 @@
                 ></ListView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/text_view_total_calo"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:text="Total calories: 280"
+                android:gravity="center|left"
+                android:textSize="35dp"/>
+            <Button
+                android:id="@+id/button_Confirm"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:text="Confirm"
+                android:gravity="center"
+                android:textSize="35dp"
+                android:textAllCaps="false"
+                android:background="#F7EEEE" />
+        </LinearLayout>
         <!-- Thanh điều hướng dưới cùng -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,5 +103,4 @@
         </LinearLayout>
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
