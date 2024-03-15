@@ -13,6 +13,27 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".Main_food"
+            android:exported="false" />
+        <activity
+            android:name=".Stir_fried_meal"
+            android:exported="false" />
+        <activity
+            android:name=".Salad"
+            android:exported="false" />
+        <activity
+            android:name=".Grilled_food"
+            android:exported="false" />
+        <activity
+            android:name=".Hot_pot"
+            android:exported="false" />
+        <activity
+            android:name=".Sweets"
+            android:exported="false" />
+        <activity
+            android:name=".Soup"
+            android:exported="false" />
+        <activity
             android:name=".Admin_ac"
             android:exported="false" />
         <activity
