@@ -34,9 +34,6 @@
             android:name=".Hot_pot"
             android:exported="false" />
         <activity
-            android:name=".MainActivity2"
-            android:exported="false" />
-        <activity
             android:name=".Sweets"
             android:exported="false" />
         <activity
