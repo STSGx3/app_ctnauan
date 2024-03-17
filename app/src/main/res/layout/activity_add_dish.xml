@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Add_dish">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#D3D3D3"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/home"
+                android:layout_width="411dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:text="Add dish" />
+        </LinearLayout>
+
+
+        <!-- Nội dung chính của ứng dụng -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/imageButton_addimg_add_dish"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/image"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.03" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/imageButton_addimg_add_dish"
+                tools:layout_editor_absoluteX="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Name of dish"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/edittext_namedish_add_dish"
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/custom_edittext" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="4dp">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Food ingredients"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/edittext_Food_ingredients_add_dish"
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/custom_edittext" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="4dp">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Directions"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/edittext_Directions_add_dish"
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/custom_edittext" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="4dp">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Calories"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/edittext_Calories_add_dish"
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/custom_edittext" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="4dp">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Duration"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/edittext_Duration_add_dish"
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/custom_edittext" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:text="Classify"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                app:layout_constraintVertical_bias="0.0">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_Classify_Hot_pot"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="30dp"
+                        android:text="Hot pot" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Hot pot " />
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_Classify_Sweets"
+                        android:layout_width="33dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="45dp"
+                        android:text="Sweets" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Sweets" />
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_Soup_Sweets"
+                        android:layout_width="33dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="45dp"
+                        android:text="Soup" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Soup" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp">
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_Grilled_food_Hot_pot"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="30dp"
+                        android:text="Grilled food" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Grilled food" />
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_Stir_fried_meal_Hot_pot"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="70dp"
+                        android:text="Stir fried meal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Stir fried meal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp">
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_Grilled_food_Hot_pot"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="30dp"
+                        android:text="Grilled food" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Grilled food" />
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_Stir_fried_meal_Hot_pot"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="70dp"
+                        android:text="Stir fried meal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Stir fried meal" />
+                </LinearLayout>
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/button_Confirm_add_dish"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                android:text="Confirm"
+                android:textAllCaps="false"
+                android:textSize="25dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/custom_button"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Thanh điều hướng dưới cùng -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:orientation="horizontal"
+            android:background="#D3D3D3"
+            >
+
+            <ImageButton
+                android:id="@+id/bt_home"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                android:background="@drawable/home"
+                android:layout_gravity="bottom"
+                />
+
+            <ImageButton
+                android:id="@+id/bt_search"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                android:background="@drawable/search"
+                android:layout_marginLeft="60dp"
+                android:layout_gravity="bottom"/>
+
+            <ImageButton
+                android:id="@+id/bt_edit"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                android:background="@drawable/edit"
+                android:layout_marginLeft="60dp"
+                android:layout_gravity="bottom"/>
+            <ImageButton
+                android:id="@+id/bt_user"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                android:background="@drawable/user"
+                android:layout_marginLeft="60dp"
+                android:layout_gravity="bottom"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
