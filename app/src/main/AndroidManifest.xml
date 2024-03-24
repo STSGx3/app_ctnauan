@@ -13,6 +13,9 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".TestChillSignIn"
+            android:exported="false" />
+        <activity
             android:name=".Add_dish"
             android:exported="false" />
         <activity

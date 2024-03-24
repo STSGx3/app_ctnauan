@@ -2,7 +2,6 @@ package com.example.baitaplonadnc;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
@@ -47,8 +46,10 @@ public class Home extends AppCompatActivity {
         button_hot_soup=findViewById(R.id.button_hot_soup);
         button_lau=findViewById(R.id.button_lau);
         button_sweet=findViewById(R.id.button_sweet);
+        button_salad=findViewById(R.id.button_salad);
     }
     void Evenlist(){
+        //Thanh điều hướng bên dưới
         bt_home.setOnClickListener(view -> {
             Intent intent = new Intent(Home.this, Home.class);
             startActivity(intent);
@@ -65,5 +66,35 @@ public class Home extends AppCompatActivity {
             Intent intent = new Intent(Home.this, User_ac.class);
             startActivity(intent);
         });
+        //Nội dùng của home app
+        imageButton_monxao.setOnClickListener(view -> {
+            Intent intent = new Intent(Home.this, Stir_fried_meal.class);
+            startActivity(intent);
+        });
+        imageButton_monnuong.setOnClickListener(view -> {
+            Intent intent = new Intent(Home.this, Grilled_food.class);
+            startActivity(intent);
+        });
+        imageButton_mainfd.setOnClickListener(view -> {
+            Intent intent = new Intent(Home.this, Main_food.class);
+            startActivity(intent);
+        });
+        button_hot_soup.setOnClickListener(view -> {
+            Intent intent = new Intent(Home.this, Soup.class);
+            startActivity(intent);
+        });
+        button_sweet.setOnClickListener(view -> {
+            Intent intent = new Intent(Home.this, Sweets.class);
+            startActivity(intent);
+        });
+        button_lau.setOnClickListener(view -> {
+            Intent intent = new Intent(Home.this, Hot_pot.class);
+            startActivity(intent);
+        });
+        button_salad.setOnClickListener(view -> {
+            Intent intent = new Intent(Home.this, Salad.class);
+            startActivity(intent);
+        });
+
     }
 }
