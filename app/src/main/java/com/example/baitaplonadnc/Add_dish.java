@@ -2,6 +2,8 @@ package com.example.baitaplonadnc;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
@@ -11,10 +13,15 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class Add_dish extends AppCompatActivity {
-    ImageButton bt_home;
-    ImageButton bt_search;
-    ImageButton bt_edit;
-    ImageButton bt_user;
+
+    ImageButton bt_edit,bt_user,bt_search,bt_home;
+
+    Button button_Confirm_add_dish;
+    EditText edittext_namedish_add_dish,
+            edittext_Food_ingredients_add_dish,
+            edittext_Directions_add_dish,
+            edittext_Calories_add_dish,
+            edittext_Duration_add_dish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +55,10 @@ public class Add_dish extends AppCompatActivity {
             Intent intent = new Intent(Add_dish.this, User_ac.class);
             startActivity(intent);
         });
+        //Đẩy dữ liệu lên firebase
+        button_Confirm_add_dish.setOnClickListener(view -> {
+            Adddish();
+        });
     }
 
     public void findID() {
@@ -55,5 +66,9 @@ public class Add_dish extends AppCompatActivity {
         bt_edit = findViewById(R.id.bt_edit);
         bt_search = findViewById(R.id.bt_search);
         bt_user = findViewById(R.id.bt_user);
+        button_Confirm_add_dish=findViewById(R.id.button_Confirm_add_dish);
+    }
+    private void Adddish(){
+
     }
 }
