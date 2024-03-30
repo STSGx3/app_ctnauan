@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity{
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 Toast.makeText(MainActivity.this,"Đăng nhập thành công",Toast.LENGTH_SHORT).show();
+               // Intent intent = new Intent(MainActivity.this, Home.class);
                 Intent intent = new Intent(MainActivity.this, Home.class);
                 startActivity(intent);
             }else {

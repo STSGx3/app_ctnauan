@@ -62,6 +62,7 @@ public class Sign_up extends AppCompatActivity {
             Toast.makeText(Sign_up.this,"nhập lại mật khẩu sai",Toast.LENGTH_SHORT).show();
             return;
         }
+        //đẩy người tài khoản mới lên
         mAut.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

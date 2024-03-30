@@ -9,12 +9,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Sweets extends AppCompatActivity {
     ImageButton bt_home;
     ImageButton bt_search;
     ImageButton bt_edit;
     ImageButton bt_user;
+    private RecyclerView Relative_dish;
+    private Dish_Adapter dishAdapter;
+    private LinearLayoutManager linearLayoutManager ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +36,11 @@ public class Sweets extends AppCompatActivity {
         });
         findID();
         Evenlist();
+        linearLayoutManager = new LinearLayoutManager(Sweets.this);
+        Relative_dish.setLayoutManager(linearLayoutManager);
+        //Lấy dữ liệu vào list
+        //dishAdapter.setData(getListDish());
+        Relative_dish.setAdapter(dishAdapter);
     }
 
     private void Evenlist() {
@@ -55,5 +68,12 @@ public class Sweets extends AppCompatActivity {
         bt_edit = findViewById(R.id.bt_edit);
         bt_search = findViewById(R.id.bt_search);
         bt_user = findViewById(R.id.bt_user);
+    }
+    private List<Dish> getListDish(){
+        List<Dish> list = new ArrayList<>();
+        //test list
+
+
+        return list;
     }
 }

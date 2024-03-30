@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+            <ImageView
+                android:id="@+id/IMGbutton_dish"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/image"
+                />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/button_to_about_dish"
+                android:layout_width="230dp"
+                android:text="Name dish"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textSize="16dp"
+                android:layout_toEndOf="@+id/IMGbutton_dish"/>
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/TV_about_calo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="0dp"
+                android:layout_toEndOf="@+id/button_to_about_dish"
+                android:text="40 CALO" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+

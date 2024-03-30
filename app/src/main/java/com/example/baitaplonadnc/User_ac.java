@@ -42,6 +42,7 @@ public class User_ac extends AppCompatActivity {
     ImageButton bt_edit;
     ImageButton bt_user;
     ImageButton imageButton_plus;
+    ImageButton imageButton_edit_dish_foruser;
     TextView textView_email;
     ImageView profile_image;
     @Override
@@ -67,6 +68,7 @@ public class User_ac extends AppCompatActivity {
         imageButton_plus=findViewById(R.id.imageButton_plus);
         textView_email = findViewById(R.id.textView_email);
         profile_image=findViewById(R.id.profile_image);
+        imageButton_edit_dish_foruser=findViewById(R.id.imageButton_edit_dish_foruser);
     }
     void Evenlist(){
         bt_home.setOnClickListener(view -> {
@@ -87,6 +89,10 @@ public class User_ac extends AppCompatActivity {
         });
         imageButton_plus.setOnClickListener(view -> {
             Intent intent = new Intent(User_ac.this, Add_dish.class);
+            startActivity(intent);
+        });
+        imageButton_edit_dish_foruser.setOnClickListener(view -> {
+            Intent intent = new Intent(User_ac.this, List_dish_ower.class);
             startActivity(intent);
         });
     }

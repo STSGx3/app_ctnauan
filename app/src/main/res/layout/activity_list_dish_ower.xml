@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Search">
+    tools:context=".List_dish_ower">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,7 +23,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textSize="25dp"
-                android:text="Main food" />
+                android:text="Lish dish ower" />
         </LinearLayout>
 
 
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp" >
             <EditText
-                android:id="@+id/edt_search_Main_food"
+                android:id="@+id/edt_search"
                 android:layout_width="240dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
@@ -40,7 +40,7 @@
                 android:textSize="15dp"
                 android:background="@drawable/custtom_edt2"/>
             <ImageButton
-                android:id="@+id/button_search_Main_food"
+                android:id="@+id/button_search"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/search"

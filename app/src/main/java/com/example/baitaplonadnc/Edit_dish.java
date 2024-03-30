@@ -25,6 +25,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,8 +45,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Time;
 import java.util.List;
+import java.util.Objects;
 
-public class Add_dish extends AppCompatActivity {
+public class Edit_dish extends AppCompatActivity {
     Dish dish;
     FirebaseDatabase database;
     FirebaseStorage storage;
@@ -77,7 +79,7 @@ public class Add_dish extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_add_dish);
+        setContentView(R.layout.activity_edit_dish);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -86,27 +88,73 @@ public class Add_dish extends AppCompatActivity {
         dish = new Dish();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("list_dish");
+        Intent intent = getIntent();
+        ID= intent.getStringExtra("ID");
+        Name_ofDish= intent.getStringExtra("namedish");
+        Calories= intent.getStringExtra("calo");
+        Duration= intent.getStringExtra("timenau");
+        Food_ingredients= intent.getStringExtra("nguyenlieu");
+        Directions= intent.getStringExtra("cachnau");
+        LinkAnh= intent.getStringExtra("linkanh");
+        Classify= intent.getStringExtra("classify");
+        email= intent.getStringExtra("ower");
         findID();
+        SetDulieulayve();
         Evenlist();
         //LayDS();
+    }
+    private void SetDulieulayve(){
+        edittext_ID.setText(ID);
+        edittext_namedish_add_dish.setText(Name_ofDish);
+        edittext_Food_ingredients_add_dish.setText(Food_ingredients);
+        edittext_Directions_add_dish.setText(Directions);
+        edittext_Calories_add_dish.setText(Calories);
+        edittext_Duration_add_dish.setText(Duration);
+        Uri uri = Uri.parse(LinkAnh);
+        Glide.with(Edit_dish.this).load(uri).error(R.drawable.image).into(imageButton_addimg_add_dish);
+        CapnhatDulieuClassify();
+    }
+
+    private void CapnhatDulieuClassify() {
+        if(Objects.equals(Classify, "Hot_pot")){
+            radiobutton_Hot_pot.setChecked(true);
+        }
+        if(Objects.equals(Classify, "Sweets")){
+            radiobutton_Sweets.setChecked(true);
+        }
+        if(Objects.equals(Classify, "Soup")){
+            radiobutton_Soup.setChecked(true);
+        }
+        if(Objects.equals(Classify, "Grilled_food")){
+            radiobutton_Grilled_food.setChecked(true);
+        }
+        if(Objects.equals(Classify, "Stir_fried_meal")){
+            radiobutton_Stir_fried_meal.setChecked(true);
+        }
+        if(Objects.equals(Classify, "Salat")){
+            radiobutton_Salat.setChecked(true);
+        }
+        if(Objects.equals(Classify, "main_food")){
+            radiobutton_main_food.setChecked(true);
+        }
     }
 
     private void Evenlist() {
         //Thanh điều hướng bên dưới
         bt_home.setOnClickListener(view -> {
-            Intent intent = new Intent(Add_dish.this, Home.class);
+            Intent intent = new Intent(Edit_dish.this, Home.class);
             startActivity(intent);
         });
         bt_edit.setOnClickListener(view -> {
-            Intent intent = new Intent(Add_dish.this, Total_calories.class);
+            Intent intent = new Intent(Edit_dish.this, Total_calories.class);
             startActivity(intent);
         });
         bt_search.setOnClickListener(view -> {
-            Intent intent = new Intent(Add_dish.this, Search.class);
+            Intent intent = new Intent(Edit_dish.this, Search.class);
             startActivity(intent);
         });
         bt_user.setOnClickListener(view -> {
-            Intent intent = new Intent(Add_dish.this, User_ac.class);
+            Intent intent = new Intent(Edit_dish.this, User_ac.class);
             startActivity(intent);
         });
         //Lấy ảnh ra
@@ -115,9 +163,11 @@ public class Add_dish extends AppCompatActivity {
         });
         //Đẩy dữ liệu lên firebase
         button_Confirm_add_dish.setOnClickListener(view -> {
-           addDish();
+            addDish();
         });
     }
+
+
     private void addDish(){
         FirebaseUser User = FirebaseAuth.getInstance().getCurrentUser();
         if(User==null){
@@ -154,7 +204,7 @@ public class Add_dish extends AppCompatActivity {
             LinkAnh="aaa";
         }
         else {
-            Toast.makeText(Add_dish.this,"Chuoi ko rong ",Toast.LENGTH_SHORT).show();
+            Toast.makeText(Edit_dish.this,"Chuoi ko rong ",Toast.LENGTH_SHORT).show();
         }
         AddTTdish(ID,Name_ofDish,Food_ingredients,Directions,Calories,Duration,Classify,email,LinkAnh);
 
@@ -216,7 +266,7 @@ public class Add_dish extends AppCompatActivity {
                 if(dish1!=null) {
                     mListDish.add(dish1);
                     String bn = dish.getID();
-                    Toast.makeText(Add_dish.this,"ID "+bn,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Edit_dish.this,"ID "+bn,Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -244,21 +294,21 @@ public class Add_dish extends AppCompatActivity {
                     public void onSuccess(Uri uri) {
                         String bn=uri.toString();
                         LinkAnh=bn;
-                        Toast.makeText(Add_dish.this,"Thêm thành công "+bn,Toast.LENGTH_LONG).show();
+                        Toast.makeText(Edit_dish.this,"Thêm thành công "+bn,Toast.LENGTH_LONG).show();
                     }
                 });
-                Toast.makeText(Add_dish.this,"Thêm thành công ",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Edit_dish.this,"Thêm thành công ",Toast.LENGTH_SHORT).show();
             }
         });
     }
     private void AddTTdish(String ID,
-                         String Name_ofDish,
-                         String Food_ingredients,
-                         String Directions,
-                         String Calories,
-                         String Duration,
-                         String Classify,
-                         String Ower,String Linkanh){
+                           String Name_ofDish,
+                           String Food_ingredients,
+                           String Directions,
+                           String Calories,
+                           String Duration,
+                           String Classify,
+                           String Ower,String Linkanh){
         //Ghi dữ liệu vào để chuyển lên firebase
         myRef = FirebaseDatabase.getInstance().getReference("list_dish");
 
@@ -278,12 +328,12 @@ public class Add_dish extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 myRef.child(thamchieu).setValue(dish);
-                Toast.makeText(Add_dish.this,"Thêm thành công ",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Edit_dish.this,"Thêm thành công ",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(Add_dish.this,"Thêm không thành công ",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Edit_dish.this,"Thêm không thành công ",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -312,7 +362,7 @@ public class Add_dish extends AppCompatActivity {
                         try {
                             selectedImageBitmap
                                     = MediaStore.Images.Media.getBitmap(
-                                    Add_dish.this.getContentResolver(),
+                                    Edit_dish.this.getContentResolver(),
                                     ImageUri);
                         }
                         catch (IOException e) {

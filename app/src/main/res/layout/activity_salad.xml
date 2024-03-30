@@ -53,12 +53,16 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
-            <ListView
-                android:id="@+id/list_food_Salad"
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Relative_dish"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#F1EEEE"
-                ></ListView>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <!-- Thanh điều hướng dưới cùng -->

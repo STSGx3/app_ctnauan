@@ -58,13 +58,13 @@
 
                 <TextView
                     android:id="@+id/Text_view_time_make_dish_about_dish"
-                    android:layout_width="120dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:layout_marginTop="232dp"
                     android:gravity="center"
                     android:text="30 Min"
                     android:layout_marginLeft="5dp"
-                    android:textSize="25dp"
+                    android:textSize="22dp"
                     android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.051"
@@ -73,13 +73,13 @@
 
                 <TextView
                     android:id="@+id/Text_view_calo_dish_about_dish"
-                    android:layout_width="120dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:layout_marginTop="232dp"
                     android:layout_marginRight="5dp"
                     android:gravity="center"
                     android:text="190 Kcal"
-                    android:textSize="25dp"
+                    android:textSize="22dp"
                     android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.926"
@@ -104,27 +104,17 @@
                     android:background="@drawable/custtom_view_for_about_dish"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="80dp"
-                    android:gravity="center"
-                    android:text="Ingredients"
-                    android:textColor="#FFFFFF"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:textSize="25dp"/>
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
+                    android:id="@+id/textView5"
                     android:layout_width="150dp"
-                    android:layout_height="80dp"
-                    android:layout_marginTop="188dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Directions"
+                    android:text="Ingredients"
                     android:textColor="#FFFFFF"
                     android:textSize="25dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -133,32 +123,63 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/Text_view_Ingredients_dish"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:layout_marginTop="80dp"
+                    android:id="@+id/textView4"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="demo"
+                    android:text="Directions"
                     android:textColor="#FFFFFF"
-                    android:textSize="15dp"
+                    android:textSize="25dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/tch" />
 
-                <TextView
-                    android:id="@+id/Text_view_Directions_dish"
+                <ScrollView
+                    android:id="@+id/tch"
                     android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:layout_marginTop="268dp"
-                    android:gravity="center"
-                    android:text="demo"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15dp"
+                    android:layout_height="100dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView5">
+
+                    <TextView
+                        android:id="@+id/Text_view_Ingredients_dish"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="demo"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                </ScrollView>
+
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+
+                    android:fillViewport="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+                    <TextView
+                        android:id="@+id/Text_view_Directions_dish"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top|center"
+                        android:text="demo"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                </ScrollView>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

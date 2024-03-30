@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "63273634988",
-    "project_id": "appct-42f4a",
-    "storage_bucket": "appct-42f4a.appspot.com"
+    "project_number": "605225948676",
+    "project_id": "appctna-ebb8f",
+    "storage_bucket": "appctna-ebb8f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:63273634988:android:fdda8af1b4d6063495e309",
+        "mobilesdk_app_id": "1:605225948676:android:4b91bae674f05144ef4751",
         "android_client_info": {
           "package_name": "com.example.baitaplonadnc"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD8CWVJf0bpyhAlV0f8nB-v4nN449t3ANI"
+          "current_key": "AIzaSyBiOkn-bQzNQo4e3E65vrRUSlK2qkYQxCY"
         }
       ],
       "services": {

@@ -1,46 +1,51 @@
 package com.example.baitaplonadnc;
 
+import android.net.Uri;
+
 import java.sql.Time;
 
 public class Dish {
-    private  int ID;
+    private  String ID;
     private String Name_ofDish;
     private String Food_ingredients;
     private String Directions;
-    private Integer Calories;
-    private Time Duration;
+    private String Calories;
+    private String Duration;
     private String Classify;
     private String Ower;
-    public Dish(int ID, String Name_ofDish, String Food_ingredients, String Directions, Integer Calories,Time Duration,String Classify,String Ower){
-        this.ID=ID;
-        this.Name_ofDish=Name_ofDish;
-        this.Food_ingredients=Food_ingredients;
-        this.Directions=Directions;
-        this.Calories=Calories;
-        this.Duration=Duration;
-        this.Classify=Classify;
-        this.Ower = Ower;
+    private String LinkAnh;
+
+    public Dish(){
+
     }
 
-    public Dish(int ID, String Name_ofDish, Integer Calories) {
-        this.ID=ID;
-        this.Name_ofDish=Name_ofDish;
-        this.Calories=Calories;
+    public Dish(String id, String name, String ingredients, String directions, String calories, String duration, String classify, String owner,String LinkAnh) {
+        this.ID = id;
+        this.Name_ofDish = name;
+        this.Food_ingredients = ingredients;
+        this.Directions = directions;
+        this.Calories= calories;
+        this.Duration = duration;
+        this.Classify = classify;
+        this.Ower = owner;
+        this.LinkAnh=LinkAnh;
     }
 
-    public void setID(int ID) {
+    public String getLinkAnh() {
+        return LinkAnh;
+    }
+
+    public void setLinkAnh(String linkAnh) {
+        LinkAnh = linkAnh;
+    }
+
+    public Dish(String ID, String Name_ofDish, String Calories) {
         this.ID = ID;
+        this.Name_ofDish = Name_ofDish;
+        this.Calories = Calories;
     }
 
-    public int getID() {
-        return ID;
-    }
-
-    public String getOwer() {
-        return Ower;
-    }
-
-    public void setID(Integer ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 
@@ -48,7 +53,15 @@ public class Dish {
         Ower = ower;
     }
 
-    public Integer getCalories() {
+    public String getOwer() {
+        return Ower;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public String getCalories() {
         return Calories;
     }
 
@@ -60,19 +73,19 @@ public class Dish {
         return Directions;
     }
 
-    public String getFood_ingredients() {
-        return Food_ingredients;
+    public String getDuration() {
+        return Duration;
     }
 
     public String getName_ofDish() {
         return Name_ofDish;
     }
 
-    public Time getDuration() {
-        return Duration;
+    public String getFood_ingredients() {
+        return Food_ingredients;
     }
 
-    public void setCalories(Integer calories) {
+    public void setCalories(String calories) {
         Calories = calories;
     }
 
@@ -84,15 +97,15 @@ public class Dish {
         Directions = directions;
     }
 
-    public void setDuration(Time duration) {
+    public void setDuration(String duration) {
         Duration = duration;
-    }
-
-    public void setFood_ingredients(String food_ingredients) {
-        Food_ingredients = food_ingredients;
     }
 
     public void setName_ofDish(String name_ofDish) {
         Name_ofDish = name_ofDish;
+    }
+
+    public void setFood_ingredients(String food_ingredients) {
+        Food_ingredients = food_ingredients;
     }
 }

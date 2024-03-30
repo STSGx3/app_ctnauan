@@ -16,6 +16,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,14 +30,14 @@ import com.google.firebase.storage.FirebaseStorage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Search extends AppCompatActivity {
+public class List_dish_ower extends AppCompatActivity {
     ImageButton bt_home;
     ImageButton bt_search;
     ImageButton bt_edit;
     ImageButton bt_user;
     EditText edt_search;
     ImageButton button_search;
-    String bnTimkiem;
+    String bnTimkiem,email;
     private  RecyclerView Relative_dish;
     private Dish_Adapter dishAdapter;
     private LinearLayoutManager linearLayoutManager ;
@@ -44,7 +46,7 @@ public class Search extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_list_dish_ower);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -52,7 +54,7 @@ public class Search extends AppCompatActivity {
         });
         findID();
         Evenlist();
-        linearLayoutManager = new LinearLayoutManager(Search.this);
+        linearLayoutManager = new LinearLayoutManager(List_dish_ower.this);
         Relative_dish.setLayoutManager(linearLayoutManager);
         //Lấy dữ liệu vào list
         getlistDishFromRealtimedatabase();
@@ -67,7 +69,7 @@ public class Search extends AppCompatActivity {
         mListDish = new ArrayList<>();
         button_search= findViewById(R.id.button_search);
         edt_search = findViewById(R.id.edt_search);
-        dishAdapter = new Dish_Adapter(Search.this, mListDish, new Dish_Adapter.IClickListener() {
+        dishAdapter = new Dish_Adapter(List_dish_ower.this, mListDish, new Dish_Adapter.IClickListener() {
             @Override
             public void onClick(Dish dish) {
                 String ID = dish.getID();
@@ -77,14 +79,18 @@ public class Search extends AppCompatActivity {
                 String nguyenlieu = dish.getFood_ingredients();
                 String cachnau = dish.getDirections();
                 String linkanh = dish.getLinkAnh();
-                Intent intent = new Intent(Search.this, About_dish.class);
+                String classify=dish.getClassify();
+                String ower = dish.getOwer();
+                Intent intent = new Intent(List_dish_ower.this, Edit_dish.class);
                 intent.putExtra("ID",ID );
                 intent.putExtra("namedish",namedish );
+                intent.putExtra("classify",classify);
                 intent.putExtra("calo",calo );
                 intent.putExtra("timenau",timenau );
                 intent.putExtra("nguyenlieu",nguyenlieu );
                 intent.putExtra("cachnau",cachnau );
                 intent.putExtra("linkanh",linkanh );
+                intent.putExtra("ower",ower);
                 startActivity(intent);
             }
         });
@@ -96,7 +102,14 @@ public class Search extends AppCompatActivity {
         if(mListDish!=null){
             mListDish.clear();
         }
-        databaseReference.addChildEventListener(new ChildEventListener() {
+        FirebaseUser User = FirebaseAuth.getInstance().getCurrentUser();
+        if(User==null){
+            return;
+        }
+        email = User.getEmail();
+        Query query = databaseReference.orderByChild("ower").equalTo(email);
+
+        query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Dish dish=snapshot.getValue(Dish.class);
@@ -129,32 +142,32 @@ public class Search extends AppCompatActivity {
     }
     void Evenlist(){
         bt_home.setOnClickListener(view -> {
-            Intent intent = new Intent(Search.this, Home.class);
+            Intent intent = new Intent(List_dish_ower.this, Home.class);
             startActivity(intent);
         });
         bt_edit.setOnClickListener(view -> {
-            Intent intent = new Intent(Search.this, Total_calories.class);
+            Intent intent = new Intent(List_dish_ower.this, Total_calories.class);
             startActivity(intent);
         });
         bt_search.setOnClickListener(view -> {
-            Intent intent = new Intent(Search.this, Search.class);
+            Intent intent = new Intent(List_dish_ower.this, Search.class);
             startActivity(intent);
         });
         bt_user.setOnClickListener(view -> {
-            Intent intent = new Intent(Search.this, User_ac.class);
+            Intent intent = new Intent(List_dish_ower.this, User_ac.class);
             startActivity(intent);
         });
         button_search.setOnClickListener(view -> {
-           bnTimkiem= edt_search.getText().toString().trim();
-           if(bnTimkiem.isEmpty()){
-               Toast.makeText(Search.this,"Chuỗi rỗng",Toast.LENGTH_SHORT).show();
-               getlistDishFromRealtimedatabase();
-           }else {
-               if(mListDish!=null){
-                   mListDish.clear();
-               }
-               timkiem(bnTimkiem);
-           }
+            bnTimkiem= edt_search.getText().toString().trim();
+            if(bnTimkiem.isEmpty()){
+                Toast.makeText(List_dish_ower.this,"Chuỗi rỗng",Toast.LENGTH_SHORT).show();
+                getlistDishFromRealtimedatabase();
+            }else {
+                if(mListDish!=null){
+                    mListDish.clear();
+                }
+                timkiem(bnTimkiem);
+            }
         });
     }
 
