@@ -1,5 +1,6 @@
 package com.example.baitaplonadnc;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -46,6 +47,7 @@ import java.sql.Time;
 import java.util.List;
 
 public class Add_dish extends AppCompatActivity {
+    String bn;
     Dish dish;
     FirebaseDatabase database;
     FirebaseStorage storage;
@@ -55,6 +57,7 @@ public class Add_dish extends AppCompatActivity {
     String ID,Calories,email,Name_ofDish,Food_ingredients,Directions,Duration,LinkAnh;
     String Classify;
     Uri ImageUri;
+    Uri VideoUri;
     ImageButton bt_edit,bt_user,bt_search,bt_home;
     ImageView imageButton_addimg_add_dish;
     List<Dish> mListDish;
@@ -73,6 +76,8 @@ public class Add_dish extends AppCompatActivity {
             radiobutton_Salat,
             radiobutton_main_food;
 
+    private volatile boolean running = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,24 +93,30 @@ public class Add_dish extends AppCompatActivity {
         myRef = database.getReference("list_dish");
         findID();
         Evenlist();
+
         //LayDS();
     }
+
 
     private void Evenlist() {
         //Thanh điều hướng bên dưới
         bt_home.setOnClickListener(view -> {
+            XoaDL();
             Intent intent = new Intent(Add_dish.this, Home.class);
             startActivity(intent);
         });
         bt_edit.setOnClickListener(view -> {
+            XoaDL();
             Intent intent = new Intent(Add_dish.this, Total_calories.class);
             startActivity(intent);
         });
         bt_search.setOnClickListener(view -> {
+            XoaDL();
             Intent intent = new Intent(Add_dish.this, Search.class);
             startActivity(intent);
         });
         bt_user.setOnClickListener(view -> {
+            XoaDL();
             Intent intent = new Intent(Add_dish.this, User_ac.class);
             startActivity(intent);
         });
@@ -149,15 +160,14 @@ public class Add_dish extends AppCompatActivity {
         }
         //Đẩy ảnh lên storage
         AddImgToStorage();
-        //Thêm thông tin về món ăn lên reatime database
         if(LinkAnh==null){
             LinkAnh="aaa";
         }
         else {
             Toast.makeText(Add_dish.this,"Chuoi ko rong ",Toast.LENGTH_SHORT).show();
         }
-        AddTTdish(ID,Name_ofDish,Food_ingredients,Directions,Calories,Duration,Classify,email,LinkAnh);
-
+        //Thêm thông tin về món ăn lên reatime database
+        AddTTdish(ID, Name_ofDish, Food_ingredients, Directions, Calories, Duration, Classify, email, LinkAnh);
     }
 
     public void findID() {
@@ -234,7 +244,6 @@ public class Add_dish extends AppCompatActivity {
     private void AddImgToStorage(){
         storage = FirebaseStorage.getInstance();
         storageRef=storage.getReference("Image_dish");
-        dish.setID("1");
         StorageReference bnStRf = storageRef.child("image" + ID + ".png");
         bnStRf.putFile(ImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -242,23 +251,23 @@ public class Add_dish extends AppCompatActivity {
                 bnStRf.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        String bn=uri.toString();
+                        bn=uri.toString();
                         LinkAnh=bn;
                         Toast.makeText(Add_dish.this,"Thêm thành công "+bn,Toast.LENGTH_LONG).show();
                     }
                 });
-                Toast.makeText(Add_dish.this,"Thêm thành công ",Toast.LENGTH_SHORT).show();
             }
         });
     }
+    @SuppressLint("SuspiciousIndentation")
     private void AddTTdish(String ID,
-                         String Name_ofDish,
-                         String Food_ingredients,
-                         String Directions,
-                         String Calories,
-                         String Duration,
-                         String Classify,
-                         String Ower,String Linkanh){
+                           String Name_ofDish,
+                           String Food_ingredients,
+                           String Directions,
+                           String Calories,
+                           String Duration,
+                           String Classify,
+                           String Ower, String Linkanh){
         //Ghi dữ liệu vào để chuyển lên firebase
         myRef = FirebaseDatabase.getInstance().getReference("list_dish");
 
@@ -274,18 +283,18 @@ public class Add_dish extends AppCompatActivity {
         dish.setLinkAnh(Linkanh);
         //Xác định biến để tham chiếu ở đây dùng ID
         thamchieu = String.valueOf(dish.getID());
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                myRef.child(thamchieu).setValue(dish);
-                Toast.makeText(Add_dish.this,"Thêm thành công ",Toast.LENGTH_SHORT).show();
-            }
+            myRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    myRef.child(thamchieu).setValue(dish);
+                    Toast.makeText(Add_dish.this, "Thêm thành công ", Toast.LENGTH_SHORT).show();
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(Add_dish.this,"Thêm không thành công ",Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(Add_dish.this, "Thêm không thành công ", Toast.LENGTH_SHORT).show();
+                }
+            });
     }
 
     private void imageChooser()
@@ -323,4 +332,30 @@ public class Add_dish extends AppCompatActivity {
                     }
                 }
             });
+    private void XoaDL(){
+        edittext_ID.setText(null);
+        edittext_namedish_add_dish.setText(null);
+        edittext_Food_ingredients_add_dish.setText(null);
+        edittext_Directions_add_dish.setText(null);
+        edittext_Calories_add_dish.setText(null);
+        edittext_Duration_add_dish.setText(null);
+    }
+    private void upvideo(){
+        storage = FirebaseStorage.getInstance();
+        storageRef=storage.getReference("Video_dish");
+        StorageReference bnStRf = storageRef.child("video" + ID + ".mp4");
+        bnStRf.putFile(VideoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                bnStRf.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        bn=uri.toString();
+                        LinkAnh=bn;
+                        Toast.makeText(Add_dish.this,"Thêm thành công "+bn,Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+    }
 }

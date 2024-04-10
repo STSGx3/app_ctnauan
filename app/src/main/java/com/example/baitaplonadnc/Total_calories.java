@@ -5,16 +5,42 @@ import android.os.Bundle;
 import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Total_calories extends AppCompatActivity {
     ImageButton bt_home;
     ImageButton bt_search;
     ImageButton bt_edit;
     ImageButton bt_user;
+    String ID ;
+    String namedish ;
+    String calo ;
+    String timenau;
+    String nguyenlieu ;
+    String cachnau ;
+    String linkanh ;
+    Dish dish;
+    private RecyclerView Relative_dish;
+    private Dish_Adapter dishAdapter;
+    private List<Dish> mListDish;
+    private LinearLayoutManager linearLayoutManager ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,14 +51,43 @@ public class Total_calories extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Intent intent = getIntent();
+        ID= intent.getStringExtra("ID");
         findID();
         Evenlist();
+        linearLayoutManager = new LinearLayoutManager(Total_calories.this);
+        Relative_dish.setLayoutManager(linearLayoutManager);
+        getlistDishFromRealtimedatabase();
     }
     public void findID(){
         bt_home= findViewById(R.id.bt_home);
         bt_edit=findViewById(R.id.bt_edit);
         bt_search=findViewById(R.id.bt_search);
         bt_user=findViewById(R.id.bt_user);
+        Relative_dish=findViewById(R.id.Relative_dish);
+        mListDish = new ArrayList<>();
+        dishAdapter = new Dish_Adapter(Total_calories.this, mListDish, new Dish_Adapter.IClickListener() {
+            @Override
+            public void onClick(Dish dish) {
+                String ID = dish.getID();
+                String namedish = dish.getName_ofDish();
+                String calo = dish.getCalories();
+                String timenau=dish.getDuration();
+                String nguyenlieu = dish.getFood_ingredients();
+                String cachnau = dish.getDirections();
+                String linkanh = dish.getLinkAnh();
+                Intent intent = new Intent(Total_calories.this, About_dish.class);
+                intent.putExtra("ID",ID );
+                intent.putExtra("namedish",namedish );
+                intent.putExtra("calo",calo );
+                intent.putExtra("timenau",timenau );
+                intent.putExtra("nguyenlieu",nguyenlieu );
+                intent.putExtra("cachnau",cachnau );
+                intent.putExtra("linkanh",linkanh );
+                startActivity(intent);
+            }
+        });
+        Relative_dish.setAdapter(dishAdapter);
     }
     void Evenlist(){
         bt_home.setOnClickListener(view -> {
@@ -52,4 +107,46 @@ public class Total_calories extends AppCompatActivity {
             startActivity(intent);
         });
     }
+    private void getlistDishFromRealtimedatabase(){
+        FirebaseDatabase database=FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference("list_dish");
+        if(mListDish!=null){
+            mListDish.clear();
+        }
+        if(ID==null){
+            ID="0";
+        }
+        Query query = databaseReference.orderByChild("ID").equalTo(ID);
+        query.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Dish dish=snapshot.getValue(Dish.class);
+                if(dish!=null) {
+                    mListDish.add(dish);
+                    dishAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 }

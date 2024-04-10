@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -58,8 +59,10 @@ public class List_dish_ower extends AppCompatActivity {
         Relative_dish.setLayoutManager(linearLayoutManager);
         //Lấy dữ liệu vào list
         getlistDishFromRealtimedatabase();
-
+        xoadulieudish();
     }
+
+
     public void findID(){
         bt_home= findViewById(R.id.bt_home);
         bt_edit=findViewById(R.id.bt_edit);
@@ -206,5 +209,30 @@ public class List_dish_ower extends AppCompatActivity {
 
             }
         });
+    }
+    private void xoadulieudish() {
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                FirebaseDatabase database=FirebaseDatabase.getInstance();
+                DatabaseReference databaseReference = database.getReference("list_dish");
+                String bn = mListDish.get(position).getID();
+                databaseReference.child(bn).removeValue(new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                        Toast.makeText(List_dish_ower.this,"Xóa thành công ",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                mListDish.remove(position);
+                dishAdapter.notifyDataSetChanged();
+            }
+        });
+        itemTouchHelper.attachToRecyclerView(Relative_dish);
     }
 }

@@ -29,6 +29,7 @@ public class About_dish extends AppCompatActivity {
     ImageButton bt_search;
     ImageButton bt_edit;
     ImageButton bt_user;
+    ImageButton imageButton_plus_about_dish;
 
     String ID ;
     String namedish ;
@@ -88,6 +89,11 @@ public class About_dish extends AppCompatActivity {
             Intent intent = new Intent(About_dish.this, User_ac.class);
             startActivity(intent);
         });
+        imageButton_plus_about_dish.setOnClickListener(view -> {
+            Intent intent = new Intent(About_dish.this,Total_calories.class);
+            intent.putExtra("ID",ID );
+            startActivity(intent);
+        });
     }
 
     public void findID() {
@@ -102,6 +108,8 @@ public class About_dish extends AppCompatActivity {
         Text_view_calo_dish_about_dish=findViewById(R.id.Text_view_calo_dish_about_dish);
         Text_view_Ingredients_dish=findViewById(R.id.Text_view_Ingredients_dish);
         Text_view_Directions_dish=findViewById(R.id.Text_view_Directions_dish);
+        //Chuyen ND
+        imageButton_plus_about_dish=findViewById(R.id.imageButton_plus_about_dish);
     }
     private void capnhatNoidung(){
         Uri uri = Uri.parse(linkanh);
@@ -114,4 +122,5 @@ public class About_dish extends AppCompatActivity {
         Text_view_Ingredients_dish.setText(nguyenlieu);
         Text_view_Directions_dish.setText(cachnau);
     }
+
 }

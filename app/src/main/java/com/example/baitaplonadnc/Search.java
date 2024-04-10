@@ -101,8 +101,9 @@ public class Search extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Dish dish=snapshot.getValue(Dish.class);
                 if(dish!=null) {
-                    mListDish.add(dish);
-                    dishAdapter.notifyDataSetChanged();
+                    //Lọc có điều kiện if(Integer.parseInt(dish.getCalories())<=200) {
+                        mListDish.add(dish);
+                        dishAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -162,6 +163,7 @@ public class Search extends AppCompatActivity {
         FirebaseDatabase database=FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference("list_dish");
         Query query = databaseReference.orderByChild("name_ofDish").equalTo(bnTimkiem);
+        //Nếu lọc kiểu so sánh endAt() nhỏ hơn hoặc bằng startAt() lớn hơn hoặc bằng
         query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {

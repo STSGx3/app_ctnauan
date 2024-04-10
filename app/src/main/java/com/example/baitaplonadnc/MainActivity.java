@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity{
             Toast.makeText(MainActivity.this,"mật khẩu sai",Toast.LENGTH_SHORT).show();
             return;
         }
+        //kiểm tra tài khoản đã đăng kí hay chưa
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 Toast.makeText(MainActivity.this,"Đăng nhập thành công",Toast.LENGTH_SHORT).show();

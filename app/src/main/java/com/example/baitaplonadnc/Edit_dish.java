@@ -98,6 +98,7 @@ public class Edit_dish extends AppCompatActivity {
         LinkAnh= intent.getStringExtra("linkanh");
         Classify= intent.getStringExtra("classify");
         email= intent.getStringExtra("ower");
+        ImageUri = Uri.parse(LinkAnh);
         findID();
         SetDulieulayve();
         Evenlist();
@@ -112,9 +113,9 @@ public class Edit_dish extends AppCompatActivity {
         edittext_Duration_add_dish.setText(Duration);
         Uri uri = Uri.parse(LinkAnh);
         Glide.with(Edit_dish.this).load(uri).error(R.drawable.image).into(imageButton_addimg_add_dish);
-        CapnhatDulieuClassify();
+        //CapnhatDulieuClassify();
     }
-
+/*
     private void CapnhatDulieuClassify() {
         if(Objects.equals(Classify, "Hot_pot")){
             radiobutton_Hot_pot.setChecked(true);
@@ -138,6 +139,8 @@ public class Edit_dish extends AppCompatActivity {
             radiobutton_main_food.setChecked(true);
         }
     }
+
+ */
 
     private void Evenlist() {
         //Thanh điều hướng bên dưới
@@ -259,26 +262,7 @@ public class Edit_dish extends AppCompatActivity {
     //Vẫn đang nghĩ
     private void LayDS(){
         myRef = FirebaseDatabase.getInstance().getReference("list_dish");
-        myRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Dish dish1=snapshot.getValue(Dish.class);
-                if(dish1!=null) {
-                    mListDish.add(dish1);
-                    String bn = dish.getID();
-                    Toast.makeText(Edit_dish.this,"ID "+bn,Toast.LENGTH_SHORT).show();
-                }
-            }
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {}
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
-        });
     }
     //Đẩy ảnh lên storage
     private void AddImgToStorage(){
@@ -294,10 +278,9 @@ public class Edit_dish extends AppCompatActivity {
                     public void onSuccess(Uri uri) {
                         String bn=uri.toString();
                         LinkAnh=bn;
-                        Toast.makeText(Edit_dish.this,"Thêm thành công "+bn,Toast.LENGTH_LONG).show();
+                        Toast.makeText(Edit_dish.this,"Cập nhật thành công "+bn,Toast.LENGTH_LONG).show();
                     }
                 });
-                Toast.makeText(Edit_dish.this,"Thêm thành công ",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -328,18 +311,19 @@ public class Edit_dish extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 myRef.child(thamchieu).setValue(dish);
-                Toast.makeText(Edit_dish.this,"Thêm thành công ",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Edit_dish.this,"Cập nhât thành công ",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(Edit_dish.this,"Thêm không thành công ",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Edit_dish.this,"Cập nhât không thành công ",Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void imageChooser()
     {
+
         Intent i = new Intent();
         i.setType("image/*");
         i.setAction(Intent.ACTION_GET_CONTENT);
@@ -369,6 +353,7 @@ public class Edit_dish extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         BitmapDrawable drawable = new BitmapDrawable(getResources(), selectedImageBitmap);
+                        imageButton_addimg_add_dish.setBackgroundResource(R.drawable.image);
                         imageButton_addimg_add_dish.setBackground(drawable);
                     }
                 }
