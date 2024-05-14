@@ -5,8 +5,6 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,7 +23,7 @@ public class Dish_Adapter extends RecyclerView.Adapter<Dish_Adapter.Dish_Adapter
         void onClick(Dish dish);
     }
 
-    public  Dish_Adapter( Context context, List<Dish> mListDish,IClickListener iClickListener ){
+    public  Dish_Adapter(Context context, List<Dish> mListDish, IClickListener iClickListener ){
         this.context = context;
         this.mListDish=mListDish;
         this.iClickListener=iClickListener;

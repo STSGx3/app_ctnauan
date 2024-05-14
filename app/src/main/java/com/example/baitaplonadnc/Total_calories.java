@@ -3,6 +3,7 @@ package com.example.baitaplonadnc;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Total_calories extends AppCompatActivity {
+    int totalCL;
     ImageButton bt_home;
     ImageButton bt_search;
     ImageButton bt_edit;
@@ -36,7 +38,8 @@ public class Total_calories extends AppCompatActivity {
     String nguyenlieu ;
     String cachnau ;
     String linkanh ;
-    Dish dish;
+    TextView text_view_total_calo;
+
     private RecyclerView Relative_dish;
     private Dish_Adapter dishAdapter;
     private List<Dish> mListDish;
@@ -58,12 +61,14 @@ public class Total_calories extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(Total_calories.this);
         Relative_dish.setLayoutManager(linearLayoutManager);
         getlistDishFromRealtimedatabase();
+        onPause();
     }
     public void findID(){
         bt_home= findViewById(R.id.bt_home);
         bt_edit=findViewById(R.id.bt_edit);
         bt_search=findViewById(R.id.bt_search);
         bt_user=findViewById(R.id.bt_user);
+        text_view_total_calo=findViewById(R.id.text_view_total_calo);
         Relative_dish=findViewById(R.id.Relative_dish);
         mListDish = new ArrayList<>();
         dishAdapter = new Dish_Adapter(Total_calories.this, mListDish, new Dish_Adapter.IClickListener() {
@@ -110,13 +115,11 @@ public class Total_calories extends AppCompatActivity {
     private void getlistDishFromRealtimedatabase(){
         FirebaseDatabase database=FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference("list_dish");
-        if(mListDish!=null){
-            mListDish.clear();
-        }
+
         if(ID==null){
             ID="0";
         }
-        Query query = databaseReference.orderByChild("ID").equalTo(ID);
+        Query query = databaseReference.orderByChild("id").equalTo(ID);
         query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -124,6 +127,8 @@ public class Total_calories extends AppCompatActivity {
                 if(dish!=null) {
                     mListDish.add(dish);
                     dishAdapter.notifyDataSetChanged();
+                    totalCL=totalCL+Integer.parseInt(dish.getCalories());
+                    text_view_total_calo.setText("Total calories: "+totalCL);
                 }
             }
 
@@ -147,6 +152,6 @@ public class Total_calories extends AppCompatActivity {
 
             }
         });
-    }
 
+    }
 }
