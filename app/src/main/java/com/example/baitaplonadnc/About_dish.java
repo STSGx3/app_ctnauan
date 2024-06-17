@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -21,10 +22,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.List;
 
 public class About_dish extends AppCompatActivity {
+
+
     ImageButton bt_home;
     ImageButton bt_search;
     ImageButton bt_edit;
@@ -47,6 +52,8 @@ public class About_dish extends AppCompatActivity {
             Text_view_Directions_dish;
     Dish dish;
     List<Dish> dishList;
+    FirebaseDatabase database;
+    DatabaseReference myRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +76,8 @@ public class About_dish extends AppCompatActivity {
         findID();
         Evenlist();
         capnhatNoidung();
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("list_totalCalo");
     }
 
     private void Evenlist() {
@@ -90,6 +99,7 @@ public class About_dish extends AppCompatActivity {
             startActivity(intent);
         });
         imageButton_plus_about_dish.setOnClickListener(view -> {
+            ListTotal_Calo();
             Intent intent = new Intent(About_dish.this,Total_calories.class);
             intent.putExtra("ID",ID );
             startActivity(intent);
@@ -121,6 +131,29 @@ public class About_dish extends AppCompatActivity {
         Text_view_calo_dish_about_dish.setText(bn);
         Text_view_Ingredients_dish.setText(nguyenlieu);
         Text_view_Directions_dish.setText(cachnau);
+    }
+
+    private void ListTotal_Calo(){
+        String bn = null;
+        myRef = FirebaseDatabase.getInstance().getReference("list_totalCalo");
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+             bn = String.valueOf(java.time.LocalDate.now());
+        }
+        String finalBn = bn;
+
+        myRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    myRef.child(finalBn).child(ID).setValue(ID);
+                    Toast.makeText(About_dish.this, "Thêm thành công ", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(About_dish.this, "Thêm không thành công ", Toast.LENGTH_SHORT).show();
+                }
+            });
+
     }
 
 }

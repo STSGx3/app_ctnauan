@@ -4,14 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="#00FFFFFF"
         app:layout_constraintTop_toTopOf="parent">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#00AEDCFF"
             android:padding="10dp">
             <ImageView
                 android:id="@+id/IMGbutton_dish"
@@ -21,14 +22,16 @@
                 />
 
             <TextView
-                android:layout_marginLeft="10dp"
                 android:id="@+id/button_to_about_dish"
+                android:gravity="center_vertical"
                 android:layout_width="230dp"
-                android:text="Name dish"
-                android:layout_height="wrap_content"
+                android:layout_height="51dp"
                 android:layout_centerVertical="true"
-                android:textSize="16dp"
-                android:layout_toEndOf="@+id/IMGbutton_dish"/>
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toEndOf="@+id/IMGbutton_dish"
+                android:text="Name dish"
+                android:textSize="16dp" />
 
             <TextView
                 android:gravity="center"

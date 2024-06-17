@@ -27,6 +27,7 @@ import java.util.List;
 
 public class Total_calories extends AppCompatActivity {
     int totalCL;
+    ArrayList listtotalCalo;
     ImageButton bt_home;
     ImageButton bt_search;
     ImageButton bt_edit;
@@ -60,6 +61,7 @@ public class Total_calories extends AppCompatActivity {
         Evenlist();
         linearLayoutManager = new LinearLayoutManager(Total_calories.this);
         Relative_dish.setLayoutManager(linearLayoutManager);
+        getListID_totalCalo();
         getlistDishFromRealtimedatabase();
         onPause();
     }
@@ -112,23 +114,67 @@ public class Total_calories extends AppCompatActivity {
             startActivity(intent);
         });
     }
+    private void getListID_totalCalo(){
+        FirebaseDatabase database=FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference("list_totalCalo");
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                int bn= (int) snapshot.getValue();
+                if(bn!=0) {
+                    //Lọc có điều kiện if(Integer.parseInt(dish.getCalories())<=200) {
+                    listtotalCalo.add(bn);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     private void getlistDishFromRealtimedatabase(){
         FirebaseDatabase database=FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference("list_dish");
-
-        if(ID==null){
-            ID="0";
+        String bn = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+             bn =String.valueOf(java.time.LocalDate.now());
         }
-        Query query = databaseReference.orderByChild("id").equalTo(ID);
-        query.addChildEventListener(new ChildEventListener() {
+        Query query = null;
+        FirebaseDatabase database1=FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference1 = database.getReference("list_totalCalo");
+        String bn2= String.valueOf(databaseReference1.orderByChild("list_totalCalo"));
+        if(!bn.equals(bn2)){
+            return;
+        }
+            databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Dish dish=snapshot.getValue(Dish.class);
                 if(dish!=null) {
-                    mListDish.add(dish);
-                    dishAdapter.notifyDataSetChanged();
-                    totalCL=totalCL+Integer.parseInt(dish.getCalories());
-                    text_view_total_calo.setText("Total calories: "+totalCL);
+                    for(int i=0;i<listtotalCalo.size();i++) {
+                        if(dish.getID()==String.valueOf(listtotalCalo.get(i))) {
+                            mListDish.add(dish);
+                            dishAdapter.notifyDataSetChanged();
+                            totalCL = totalCL + Integer.parseInt(dish.getCalories());
+                            text_view_total_calo.setText("Total calories: " + totalCL);
+                        }
+                    }
                 }
             }
 
