@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bgr"
     tools:context=".Home">
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +15,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="#D3D3D3"
+            android:background="#00D3D3D3"
             android:orientation="horizontal">
 
             <TextView
@@ -128,7 +129,7 @@
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:orientation="horizontal"
-            android:background="#D3D3D3"
+            android:background="#00B5DFFB"
             >
 
             <ImageButton

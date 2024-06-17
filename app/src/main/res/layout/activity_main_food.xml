@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bgr"
     tools:context=".Search">
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +15,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="#D3D3D3"
+            android:background="#00D3D3D3"
             android:orientation="horizontal">
 
             <TextView
@@ -53,12 +54,16 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
-            <ListView
-                android:id="@+id/list_food_Main_food"
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Relative_dish"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#F1EEEE"
-                ></ListView>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <!-- Thanh điều hướng dưới cùng -->
@@ -66,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:orientation="horizontal"
-            android:background="#D3D3D3"
+            android:background="#00D3D3D3"
             >
 
             <ImageButton

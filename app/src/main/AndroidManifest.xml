@@ -12,8 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         tools:targetApi="31">
+
         <activity
-            android:name=".TestChillSignIn"
+            android:name=".List_dish_ower"
+            android:exported="false" />
+        <activity
+            android:name=".Edit_dish"
             android:exported="false" />
         <activity
             android:name=".Add_dish"
